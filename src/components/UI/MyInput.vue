@@ -1,4 +1,5 @@
 <template>
+
   <input :value="modelValue" @input="updateInput" class="input" type="text">
 </template>
 
