@@ -1,19 +1,24 @@
 <template>
   <div class="app">
     <h1>Страница с постами</h1>
+    <div class="app__btns">
     <my-button
       @click="showDialog"
-      style="margin: 15px 0;"
       >
       Создать пост
     </my-button>
+    <my-select
+        v-model="selectedSort"
+        :options="sortOptions"
+    />
+    </div>
     <my-dialog v-model:show="dialogVisible">
       <post-form
           @create="createPost"
       />
     </my-dialog>
     <post-list
-        :posts="posts"
+        :posts="sortedPosts"
         @remove="removePost"
         v-if="!isPostsLoading"
     />
@@ -26,8 +31,10 @@ import postList from "@/components/postList";
 import MyDialog from "@/components/UI/MyDialog";
 import MyButton from "@/components/UI/MyButton";
 import axios from 'axios'
+import MySelect from "@/components/UI/MySelect";
 export default {
   components: {
+    MySelect,
     MyButton,
     MyDialog,
     postForm, postList,
@@ -37,6 +44,11 @@ export default {
       posts:[],
       dialogVisible: false,
       isPostsLoading: false,
+      selectedSort:'',
+      sortOptions: [
+        {value: 'title', name: "По названию"},
+        {value: 'body', name: "По содержанию"},
+      ]
     }
   },
   methods:{
@@ -53,18 +65,24 @@ this.posts = this.posts.filter(p => p.id !== post.id)
     async fetchPosts() {
       try {
         this.isPostsLoading = true;
-        setTimeout(async  () => {
         const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
        this.posts = response.data;
-          this.isPostsLoading = false;
-      },  1000)
       } catch (e) {
-        alert ('ошибка')
+        alert('ошибка')
+      } finally {
+        this.isPostsLoading = false;
       }
     }
   },
   mounted() {
     this.fetchPosts();
+  },
+  computed:{
+    sortedPosts(){
+      return [...this.posts].sort((post1,post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
+    }
+  },
+  watch: {
   }
 }
 </script>
@@ -77,6 +95,11 @@ this.posts = this.posts.filter(p => p.id !== post.id)
 }
 .app{
   padding: 20px;
+}
+.app__btns {
+  margin: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 
 </style>
