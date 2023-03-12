@@ -1,5 +1,5 @@
 <template>
-  <div v-if="posts.length > 0">
+  <div v-show="posts.length > 0">
     <h3>Список пользователей</h3>
     <transition-group name="post-list">
     <post-item
@@ -10,7 +10,7 @@
     />
     </transition-group>
   </div>
-  <h2 v-else style="color: red">
+  <h2 v-show="posts.length === 0" style="color: red">
     Ты удалил все посты !!
   </h2>
 </template>
