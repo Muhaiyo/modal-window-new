@@ -1,5 +1,5 @@
 <template>
-<select v-model="Value" @change="changeOption">
+<select v-model="ModelValue" @change="changeOption">
   <option disabled value="">Выберите из списка</option>
   <option
       v-for="option in options"
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     changeOption(event) {
-      this.$emit('update:modelValue', event.target.value);
+      this.$emit('update:ModelValue', event.target.value);
     }
   }
 }

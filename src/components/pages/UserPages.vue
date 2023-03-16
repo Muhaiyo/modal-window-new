@@ -28,7 +28,7 @@
     />
     <div v-else>Идет загрузка...</div>
     <div ref="observer" class="observer"></div>
-    <!--      <div v-for="pageNumber in totalPages"
+         <div v-for="pageNumber in totalPages"
                :key="pageNumber"
                class="page"
                :class="{
@@ -38,8 +38,7 @@
           >
             {{ pageNumber }}
        </div>
-      </div> -->
-  </div>
+      </div>
 </template>
 <script>
 import  postForm from "@/components/postForm";
@@ -82,9 +81,9 @@ export default {
     showDialog() {
       this.dialogVisible = true;
     },
-    // changePage(pageNumber) {
-    // this.page = pageNumber
-    // },
+     changePage(pageNumber) {
+    this.page = pageNumber
+     },
     async fetchPosts() {
       try {
         this.isPostsLoading = true;
@@ -142,10 +141,10 @@ export default {
     }
   },
   watch: {
-    //   page() {
-    //    this.fetchPosts()
-//    }
-  }
+      page() {
+        this.fetchPosts()
+      }
+    }
 }
 </script>
 
