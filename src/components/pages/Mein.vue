@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "my-mein"
+  name: "MyMein"
 }
 </script>
 

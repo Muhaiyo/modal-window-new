@@ -41,12 +41,13 @@
       </div>
 </template>
 <script>
-import  postForm from "@/components/postForm";
-import postList from "@/components/postList";
+import  postForm from "@/components/UI/postForm";
+import postList from "@/components/UI/postList";
 import MyButton from "@/components/UI/MyButton";
 import axios from 'axios';
 import MySelect from "@/components/UI/MySelect";
 import MyInput from "@/components/UI/MyInput";
+
 export default {
   components: {
     MyInput,
